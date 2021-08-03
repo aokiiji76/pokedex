@@ -1,0 +1,33 @@
+<h3>Stats de base</h3>
+
+{% set totalStats =
+    pokemon.pv+
+    pokemon.attaque+
+    pokemon.defense+
+    pokemon.attaqueSpe+
+    pokemon.defenseSpe+
+    pokemon.vitesse
+%}
+
+    <div class="stats-flex">
+        <div class="stats">
+            <div class="hp">HP : {{ pokemon.pv }}</div>
+            <div class="attack">ATK : {{ pokemon.attaque }}</div>
+            <div class="defense">DEF : {{ pokemon.defense }}</div>
+            <div class="special-attack">SP.ATK : {{ pokemon.attaqueSpe }}</div>
+            <div class="special-defense">SP.DEF : {{ pokemon.defenseSpe }}</div>
+            <div class="speed">VIT : {{ pokemon.vitesse }}</div>
+            <div class="speed">Total : {{ totalStats }}</div>
+        </div>
+    
+        <div class="stat-bars">
+            <meter min="1" max="100" low="34" high="68" optimum="80" value="{{ pokemon.pv }}"></meter>
+            <meter min="0" max="100" low="37" high="75" optimum="90" value="{{ pokemon.attaque }}"></meter>
+            <meter min="0" max="100" low="35" high="70" optimum="83" value="{{ pokemon.defense }}"></meter>
+            <meter min="0" max="100" low="35" high="69" optimum="83" value="{{ pokemon.attaqueSpe }}"></meter>
+            <meter min="0" max="100" low="33" high="66" optimum="78" value="{{ pokemon.defenseSpe }}"></meter>
+            <meter min="0" max="100" low="33" high="66" optimum="80" value="{{ pokemon.vitesse }}"></meter>
+    
+        </div>
+    </div>
+ 

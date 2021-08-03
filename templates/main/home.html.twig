@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello MainController!{% endblock %}
-
 {% block body %}
     
     <main>
-        
+
+    
 {#        <div class="buttons">#}
+{#            <button class="gen allGen"><a href="/">Accueil</a></button>#}
 {#            <button class="gen allGen">All Pokemon</button>#}
 {#            <button class="gen gen1">Generation - 1</button>#}
 {#            <button class="gen gen2">Generation - 2</button>#}
@@ -25,19 +25,22 @@
                 <div class="pokemon-card">
                     <div class="pokemon-title">{{ pokemon.nom }}</div>
                     <div class="pokedex-number">Pokedex N° : {{ pokemon.numero}} </div>
-            
                     <div class="pokemon">
-                        
-{#                        <img class="pokemon-image" src="{{ asset('images/' ~ pokemon.image) }}"  alt=""/>#}
                         <img class="pokemon-image" src="{{ asset('images/' ~ pokemon.numero ~ '.png' ) }}"  alt=""/>
-                        
                     </div>
-            
+    
                     <div class="types">
-                        <div class="type-1"></div>
-                        <div class="type-2"></div>
+                        <div class="types">
+                            {% for type in pokemon.type %}
+                                <div class="type--{{ type.name }}"> {{ type.name }}</div>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="flex-button"><button class="button">Fiche Pokedex</button></div>
+                   
+                    <div class="flex-button">
+                        <button class="button"><a href="{{ path("pokemon_read", {id: pokemon.id}) }}">Fiche Pokedex</a></button>
+                    </div>
+                    
                 </div>
             </div>
              {% endfor %}

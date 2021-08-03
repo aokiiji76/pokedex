@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use App\Repository\PokemonRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * Pokemon
@@ -76,6 +80,35 @@ class Pokemon
      * @ORM\Column(name="numero", type="integer", nullable=false, options={"unsigned"=true})
      */
     private $numero;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Type::class, inversedBy="pokemon")
+     */
+    private $type;
+
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $taille;
+
+    /**
+     * @ORM\Column(type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $poids;
+
+
+    #[Pure] public function __construct()
+    {
+        $this->type = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -177,6 +210,72 @@ class Pokemon
 
         return $this;
     }
+
+
+    /**
+     * @return Collection
+     */
+    public function getType(): Collection
+    {
+        return $this->type;
+    }
+
+    public function addType(Type $type): self
+    {
+        if (!$this->type->contains($type)) {
+            $this->type[] = $type;
+        }
+
+        return $this;
+    }
+
+    public function removeType(Type $type): self
+    {
+        $this->type->removeElement($type);
+
+        return $this;
+    }
+
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getTaille(): ?string
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(?string $taille): self
+    {
+        $this->taille = $taille;
+
+        return $this;
+    }
+
+    public function getPoids(): ?string
+    {
+        return $this->poids;
+    }
+
+    public function setPoids(?string $poids): self
+    {
+        $this->poids = $poids;
+
+        return $this;
+    }
+
+
+
+
 
 
 }

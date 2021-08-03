@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+use App\Repository\TypeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +38,22 @@ class Type
      */
     private $color;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Pokemon::class, mappedBy="type")
+     */
+    private $pokemon;
+
+    public function __construct()
+    {
+        $this->pokemon = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +79,33 @@ class Type
     public function setColor(string $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Pokemon[]
+     */
+    public function getPokemon(): Collection
+    {
+        return $this->pokemon;
+    }
+
+    public function addPokemon(Pokemon $pokemon): self
+    {
+        if (!$this->pokemon->contains($pokemon)) {
+            $this->pokemon[] = $pokemon;
+            $pokemon->addType($this);
+        }
+
+        return $this;
+    }
+
+    public function removePokemon(Pokemon $pokemon): self
+    {
+        if ($this->pokemon->removeElement($pokemon)) {
+            $pokemon->removeType($this);
+        }
 
         return $this;
     }
