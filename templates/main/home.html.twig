@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+    
+    <main>
+        
+{#        <div class="buttons">#}
+{#            <button class="gen allGen">All Pokemon</button>#}
+{#            <button class="gen gen1">Generation - 1</button>#}
+{#            <button class="gen gen2">Generation - 2</button>#}
+{#            <button class="gen gen3">Generation - 3</button>#}
+{#            <button class="gen gen4">Generation - 4</button>#}
+{#            <button class="gen gen5">Generation - 5</button>#}
+{#            <button class="gen gen6">Generation - 6</button>#}
+{#            <button class="gen gen7">Generation - 7</button>#}
+{#            <button class="gen gen8">Generation - 8</button>#}
+{#        </div>#}
+        
+        <div class="cards-wrapper">
+        
+            {% for pokemon in allpokemon %}
+            <div class="empty-card">
+                <div class="pokemon-card">
+                    <div class="pokemon-title">{{ pokemon.nom }}</div>
+                    <div class="pokedex-number">Pokedex N° : {{ pokemon.numero}} </div>
+            
+                    <div class="pokemon">
+                        
+{#                        <img class="pokemon-image" src="{{ asset('images/' ~ pokemon.image) }}"  alt=""/>#}
+                        <img class="pokemon-image" src="{{ asset('images/' ~ pokemon.numero ~ '.png' ) }}"  alt=""/>
+                        
+                    </div>
+            
+                    <div class="types">
+                        <div class="type-1"></div>
+                        <div class="type-2"></div>
+                    </div>
+                    <div class="flex-button"><button class="button">Fiche Pokedex</button></div>
+                </div>
+            </div>
+             {% endfor %}
+    
+        </div>
+    </main>
+
+
+{% endblock %}
