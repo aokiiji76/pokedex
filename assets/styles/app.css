@@ -7,6 +7,10 @@
     -ms-user-drag: none;
 }
 
+body, button, html, input, select, textarea {
+    height: 100vh;
+}
+
 body {
     background-image: url('https://cutewallpaper.org/21/pokemon-pokedex-background/Pokedex-Wallpaper-46-Group-Wallpapers.png');
 
